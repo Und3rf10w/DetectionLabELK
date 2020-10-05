@@ -26,7 +26,7 @@ $tag = (Invoke-WebRequest "https://api.github.com/repos/gentilkiwi/mimikatz/rele
 $mimikatzDownloadUrl = "https://github.com/gentilkiwi/mimikatz/releases/download/$tag/mimikatz_trunk.zip"
 $mimikatzRepoPath = 'C:\Users\vagrant\AppData\Local\Temp\mimikatz_trunk.zip'
 if (-not (Test-Path $mimikatzRepoPath)) {
-  Invoke-WebRequest -Uri "$mimikatzDownloadUrl" -OutFile $mimikatzRepoPath
+  Invoke-WebRequest -UseBasicParsing -Uri "$mimikatzDownloadUrl" -OutFile $mimikatzRepoPath
   Expand-Archive -path "$mimikatzRepoPath" -destinationpath 'c:\Tools\Mimikatz' -Force
 }
 else {
@@ -40,7 +40,7 @@ Write-Host "$('[{0:HH:mm}]' -f (Get-Date)) Downloading Powersploit..."
 $powersploitDownloadUrl = "https://github.com/PowerShellMafia/PowerSploit/archive/dev.zip"
 $powersploitRepoPath = "C:\Users\vagrant\AppData\Local\Temp\powersploit.zip"
 if (-not (Test-Path $powersploitRepoPath)) {
-  Invoke-WebRequest -Uri "$powersploitDownloadUrl" -OutFile $powersploitRepoPath
+  Invoke-WebRequest -UseBasicParsing -Uri "$powersploitDownloadUrl" -OutFile $powersploitRepoPath
   Expand-Archive -path "$powersploitRepoPath" -destinationpath 'c:\Tools\PowerSploit' -Force
   Copy-Item "c:\Tools\PowerSploit\PowerSploit-dev\*" "$Env:windir\System32\WindowsPowerShell\v1.0\Modules" -Recurse -Force
 }
@@ -55,7 +55,7 @@ Write-Host "$('[{0:HH:mm}]' -f (Get-Date)) Downloading Atomic Red Team..."
 $atomicRedTeamDownloadUrl = "https://github.com/redcanaryco/atomic-red-team/archive/master.zip"
 $atomicRedTeamRepoPath = "C:\Users\vagrant\AppData\Local\Temp\atomic_red_team.zip"
 if (-not (Test-Path $atomicRedTeamRepoPath)) {
-  Invoke-WebRequest -Uri "$atomicRedTeamDownloadUrl" -OutFile "$atomicRedTeamRepoPath"
+  Invoke-WebRequest -UseBasicParsing -Uri "$atomicRedTeamDownloadUrl" -OutFile "$atomicRedTeamRepoPath"
   Expand-Archive -path "$atomicRedTeamRepoPath" -destinationpath 'c:\Tools\Atomic Red Team' -Force
 }
 else {
@@ -69,7 +69,7 @@ Write-Host "$('[{0:HH:mm}]' -f (Get-Date)) Downloading BadBlood..."
 $badbloodDownloadUrl = "https://github.com/davidprowe/BadBlood/archive/master.zip"
 $badbloodRepoPath = "C:\Users\vagrant\AppData\Local\Temp\badblood.zip"
 if (-not (Test-Path $badbloodRepoPath)) {
-  Invoke-WebRequest -Uri "$badbloodDownloadUrl" -OutFile "$badbloodRepoPath"
+  Invoke-WebRequest -UseBasicParsing -Uri "$badbloodDownloadUrl" -OutFile "$badbloodRepoPath"
   Expand-Archive -path "$badbloodRepoPath" -destinationpath 'c:\Tools\BadBlood' -Force
   # Lower the number of default users to be created by BadBlood
   $invokeBadBloodPath = "c:\Tools\BadBlood\BadBlood-master\Invoke-BadBlood.ps1"

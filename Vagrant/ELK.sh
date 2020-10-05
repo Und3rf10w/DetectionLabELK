@@ -70,7 +70,7 @@ telemetry.optIn: false
 newsfeed.enabled: false
 xpack.security.enabled: true
 xpack.ingestManager.fleet.tlsCheckDisabled: true
-xpack.encryptedSavedObjects.encryptionKey: 'fhjskloppd678ehkdfdlliverpoolfcr'
+xpack.encryptedSavedObjects.encryptionKey: 'K5Re198l6OisKaDy8LIYulQMLGtPZWqS6sWPYF56AMpc'
 EOF
 
 /bin/systemctl enable kibana.service

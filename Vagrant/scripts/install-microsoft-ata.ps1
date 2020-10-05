@@ -45,7 +45,7 @@ if (-not (Test-Path "C:\Program Files\Microsoft Advanced Threat Analytics\Center
     if ($download -eq $true)
     {
         Write-Host "Downloading $title..."
-        Invoke-WebRequest -Uri $downloadUrl -OutFile "$env:temp\$title.iso"
+        Invoke-WebRequest -UseBasicParsing -Uri $downloadUrl -OutFile "$env:temp\$title.iso"
         $actualHash = (Get-FileHash -Algorithm SHA256 -Path "$env:temp\$title.iso").Hash
         If (-not ($actualHash -eq $fileHash))
         {
