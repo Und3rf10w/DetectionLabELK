@@ -15,3 +15,4 @@ Terraform/*.terraform
 Terraform/*.tfvars
 Terraform/*.lock.info
 Terraform/*.backup
+AWS/Terraform/role-policy.json
