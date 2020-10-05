@@ -11,7 +11,8 @@ Write-Host "$('[{0:HH:mm}]' -f (Get-Date)) Checking if Windows evaluation is exp
 . c:\vagrant\scripts\fix-windows-expiration.ps1
 
 # Ping DetectionLab server for usage statistics
-curl -userAgent "DetectionLab-$box" "https://detectionlab.network/$box" -UseBasicParsing | out-null
+# [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+# curl -userAgent "DetectionLab-$box" "https://detectionlab.network/$box" -UseBasicParsing | out-null
 
 Write-Host "$('[{0:HH:mm}]' -f (Get-Date)) Disable IPv6 on all network adatpers..."
 Get-NetAdapterBinding -ComponentID ms_tcpip6 | ForEach-Object {Disable-NetAdapterBinding -Name $_.Name -ComponentID ms_tcpip6}
