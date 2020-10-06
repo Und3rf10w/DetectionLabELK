@@ -16,4 +16,7 @@ Terraform/*.terraform
 Terraform/*.tfvars
 Terraform/*.lock.info
 Terraform/*.backup
-AWS/Terraform/role-policy.json
+AWS/Terraform/vm_import/wef.json
+AWS/Terraform/vm_import/win10.json
+AWS/Terraform/vm_import/logger.json
+AWS/Terraform/vm_import/role-policy.json
