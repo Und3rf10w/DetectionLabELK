@@ -1,1 +1,9 @@
-<html><body>You are being <a href="https://raw.githubusercontent.com/clong/DetectionLab/master/AWS/Terraform/vm_import/wef.json">redirected</a>.</body></html>
+[
+  {
+    "Description": "wef",
+    "Format": "ova",
+    "UserBucket": {
+        "S3Bucket": "YOUR_BUCKET_GOES_HERE",
+        "S3Key": "wef.ova"
+    }
+}]
