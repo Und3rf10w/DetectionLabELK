@@ -26,8 +26,8 @@ output "fleet_url" {
   value = local.fleet_url
 }
 
-output "splunk_url" {
-  value = local.splunk_url
+output "elk_url" {
+  value = local.elk_url
 }
 
 output "guacamole_url" {
