@@ -8,13 +8,13 @@ provider "aws" {
 # Create a VPC to launch our instances into
 resource "aws_vpc" "default" {
   cidr_block = "192.168.0.0/16"
-  tags = var.custom-tags
+  tags = merge(var.custom-tags, map("Name", "${var.instance_name_prefix}vpc"))
 }
 
 # Create an internet gateway to give our subnet access to the outside world
 resource "aws_internet_gateway" "default" {
   vpc_id = aws_vpc.default.id
-  tags = var.custom-tags
+  tags = merge(var.custom-tags, map("Name", "${var.instance_name_prefix}igw"))
 }
 
 # Grant the VPC internet access on its main route table
@@ -30,7 +30,7 @@ resource "aws_subnet" "default" {
   cidr_block              = "192.168.38.0/24"
   availability_zone       = var.availability_zone
   map_public_ip_on_launch = true
-  tags = var.custom-tags
+  tags = merge(var.custom-tags, map("Name", "${var.instance_name_prefix}subnet"))
 }
 
 # Adjust VPC DNS settings to not conflict with lab
@@ -38,7 +38,7 @@ resource "aws_vpc_dhcp_options" "default" {
   domain_name          = "windomain.local"
   domain_name_servers  = concat([aws_instance.dc.private_ip], var.external_dns_servers)
   netbios_name_servers = [aws_instance.dc.private_ip]
-  tags = var.custom-tags
+  tags = merge(var.custom-tags, map("Name", "${var.instance_name_prefix}dhcp"))
 }
 
 resource "aws_vpc_dhcp_options_association" "default" {
@@ -191,7 +191,9 @@ resource "aws_instance" "logger" {
       "echo 'vagrant    ALL=(ALL:ALL) NOPASSWD:ALL' | sudo tee -a /etc/sudoers",
       "sudo git clone https://github.com/Und3rf10w/DetectionLabELK.git /opt/DetectionLab",
       "sudo sed -i 's/eth1/ens5/g' /opt/DetectionLab/Vagrant/bootstrap.sh",
+      "sudo sed -i 's/eth1/ens5/g' /opt/DetectionLab/Vagrant/ELK.sh",
       "sudo sed -i 's/ETH1/ens5/g' /opt/DetectionLab/Vagrant/bootstrap.sh",
+      "sudo sed -i 's/ETH1/ens5/g' /opt/DetectionLab/Vagrant/ELK.sh",
       "sudo sed -i 's/eth1/ens5/g' /opt/DetectionLab/Vagrant/resources/suricata/suricata.yaml",
       "sudo sed -i 's#/vagrant/resources#/opt/DetectionLab/Vagrant/resources#g' /opt/DetectionLab/Vagrant/bootstrap.sh",
       "sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config",
